@@ -1,0 +1,42 @@
+<head>
+  <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
+  <script src="https://code.angularjs.org/1.4.6/angular-route.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<div class="contacts-container" ng-app="contactsMVC">
+  <div class="main" ng-controller="mainCtrl">
+
+    <div class="search-area">
+      <input 
+      class="search" 
+      type="text"  
+      placeholder="Search contacts"
+      ng-model="searchFilter"/>
+      <button class="new-contact" ng-click="toggleNew()">
+        new
+      </button>
+    </div>
+
+    <div class="contacts">
+      <ul class="contacts-list">
+        <li ng-repeat="contact in contacts | filter:searchFilter">
+            {{contact.name}}
+          <p ng-show="{{contact.phone}}">
+            Phone: {{contact.phone}}
+          </p>
+          <p ng-show="{{contact.email}}">
+            Email: {{contact.email}}
+          </p>
+          <p ng-show="{{contact.addr}}">
+            Address: {{contact.addr}}
+          </p>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="add-contact" ng-show="{{isActive}}">
+  </div>
+
+</div>
