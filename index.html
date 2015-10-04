@@ -1,42 +1,75 @@
 <head>
   <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
-  <script src="https://code.angularjs.org/1.4.6/angular-route.min.js"></script>
   <script src="js/app.js"></script>
+  <meta charset="UTF-8">
 </head>
+
 <div class="contacts-container" ng-app="contactsMVC">
   <div class="main" ng-controller="mainCtrl">
 
-    <div class="search-area">
+    <div class="search-area" >
       <input 
       class="search" 
       type="text"  
       placeholder="Search contacts"
-      ng-model="searchFilter"/>
+      ng-model="searchFilter"
+      ng-show="!isActive" />
       <button class="new-contact" ng-click="toggleNew()">
-        new
+        {{isActive ? backSymbol : newSymbol}}
       </button>
     </div>
-
-    <div class="contacts">
+    <div class="contacts" ng-show="!isActive">
       <ul class="contacts-list">
-        <li ng-repeat="contact in contacts | filter:searchFilter">
-            {{contact.name}}
-          <p ng-show="{{contact.phone}}">
-            Phone: {{contact.phone}}
+        <li ng-repeat="person in contacts | filter:searchFilter">
+          <p>
+            {{person.name}}
           </p>
-          <p ng-show="{{contact.email}}">
-            Email: {{contact.email}}
+          <p ng-show="person.phone">
+            Phone: {{person.phone}}
           </p>
-          <p ng-show="{{contact.addr}}">
-            Address: {{contact.addr}}
+          <p ng-show="person.email">
+            Email: {{person.email}}
           </p>
+          <p ng-show="person.addr">
+            Address: {{person.addr}}
+          </p>
+          <button ng-click="removeContact(person.name)">remove</button>
         </li>
       </ul>
     </div>
+    <form class="add-contact" ng-show="isActive">
 
+      <input 
+      class="contact-add contact-name"
+      type="text"
+      placeholder="name"
+      ng-model="contact.name" /> <br>
+
+      <input
+      class="contact-add contact-phone"
+      type="text"
+      placeholder="phone"
+      ng-model="contact.phone" /> <br>
+
+      <input
+      class="contact-add contact-email"
+      type="email"
+      placeholder="email"
+      ng-model="contact.email" /> <br>
+
+      <input
+      class="contact-add contact-addr"
+      type="text"
+      placeholder="address"
+      ng-model="contact.addr" /> <br>
+
+      <input
+      class="contact-add submit"
+      type="submit"
+      value="Add Contact"
+      name="newSubmit"
+      ng-click="addContact(contact)" />
+
+    </form>
   </div>
-
-  <div class="add-contact" ng-show="{{isActive}}">
-  </div>
-
 </div>
