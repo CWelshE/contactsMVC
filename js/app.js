@@ -31,13 +31,11 @@ contactsMVC.controller('mainCtrl', ['$scope', function($scope)
     var contactStr = "";
     $scope.contacts.forEach(function(contact)
     {
-      console.log(contact);
       contactStr += (contact.name  + "/" || "")
                  +  (contact.phone + "/" || "") 
                  +  (contact.email + "/" || "") 
                  +  (contact.addr || "")
                  +  "|";
-      console.log(contactStr);
     });
     localStorage["contactsMVC"] = contactStr;
   }
@@ -56,7 +54,13 @@ contactsMVC.controller('mainCtrl', ['$scope', function($scope)
   $scope.newSymbol  = "new",
   $scope.backSymbol = "<";
 
-  $scope.toggleNew  = function(){$scope.isActive = !$scope.isActive;}
+  $scope.toggleNew  = function(key)
+  {
+    if(!key || key.keyCode === 67)
+    {
+      $scope.isActive = !$scope.isActive;
+    }
+  }
   $scope.addContact = function(contact)
   {
     if(contact)
@@ -84,7 +88,6 @@ contactsMVC.controller('mainCtrl', ['$scope', function($scope)
           contactIdx = idx;
         }
       });
-      console.log(contactIdx);
       $scope.contacts = $scope.contacts.splice(contactIdx-1, 1);
       postToStorage();
     }

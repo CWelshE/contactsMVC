@@ -7,7 +7,7 @@
 <div class="contacts-container" ng-app="contactsMVC">
   <div class="main" ng-controller="mainCtrl">
 
-    <div class="search-area" >
+    <div class="search-area" ng-keydown="toggleNew($event)" tabindex="0">
       <input 
       class="search" 
       type="text"  
