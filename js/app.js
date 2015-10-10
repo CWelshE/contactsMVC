@@ -1,5 +1,22 @@
 var contactsMVC = angular.module('contactsMVC', []);
 
+contactsMVC.directive('focusOn', function()
+{
+  var directiveDefObj =
+  {
+    link: function postLink(scope, elem, attr)
+    {
+      scope.$on('focusOn', function(e, name)
+      {
+        if(name === attr.focusOn)
+        {
+          elem[0].focus();
+        }
+      });
+    }
+  };
+});
+
 contactsMVC.controller('mainCtrl', ['$scope', function($scope)
 {
   $scope.contacts = [];
@@ -56,7 +73,7 @@ contactsMVC.controller('mainCtrl', ['$scope', function($scope)
 
   $scope.toggleNew  = function(key)
   {
-    if(!key || key.keyCode === 67)
+    if(!key || key.keyCode === 67 && key.target.nodeName === "DIV")
     {
       $scope.isActive = !$scope.isActive;
     }
