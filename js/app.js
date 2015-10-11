@@ -4,17 +4,15 @@ contactsMVC.directive('focusOn', function()
 {
   var directiveDefObj =
   {
-    link: function postLink(scope, elem, attr)
+    link: function(scope, elem, attr)
     {
-      scope.$on('focusOn', function(e, name)
+      scope.$on(attr.focusOn, function(e)
       {
-        if(name === attr.focusOn)
-        {
-          elem[0].focus();
-        }
+        elem[0].focus();
       });
     }
   };
+  return directiveDefObj;
 });
 
 contactsMVC.controller('mainCtrl', ['$scope', function($scope)
@@ -73,6 +71,7 @@ contactsMVC.controller('mainCtrl', ['$scope', function($scope)
 
   $scope.toggleNew  = function(key)
   {
+    $scope.$broadcast('viewActivated');
     if(!key || key.keyCode === 67 && key.target.nodeName === "DIV")
     {
       $scope.isActive = !$scope.isActive;

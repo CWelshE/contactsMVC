@@ -1,6 +1,8 @@
 <head>
   <script src="https://code.angularjs.org/1.4.6/angular.min.js"></script>
   <script src="js/app.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
+  <link rel="stylesheet" href="custom.css">
   <meta charset="UTF-8">
 </head>
 
@@ -14,7 +16,7 @@
       placeholder="Search contacts"
       ng-model="searchFilter"
       ng-show="!isActive" />
-      <button class="new-contact" ng-click="toggleNew()">
+      <button class="btn wave-effect waves-light" ng-click="toggleNew()">
         {{isActive ? backSymbol : newSymbol}}
       </button>
     </div>
@@ -33,7 +35,7 @@
           <p ng-show="person.addr">
             Address: {{person.addr}}
           </p>
-          <button ng-click="removeContact(person.name)">remove</button>
+          <button ng-click="removeContact(person.name)" class="btn">remove</button>
         </li>
       </ul>
     </div>
@@ -44,7 +46,8 @@
       type="text"
       placeholder="name"
       id="name"
-      ng-model="contact.name" autofocus/> <br>
+      ng-model="contact.name" 
+      focus-on="viewActivated" /> <br>
 
       <input
       class="contact-add contact-phone"
@@ -65,7 +68,7 @@
       ng-model="contact.addr" /> <br>
 
       <input
-      class="contact-add submit"
+      class="contact-add submit btn waves-effect waves-light"
       type="submit"
       value="Add Contact"
       name="newSubmit"
